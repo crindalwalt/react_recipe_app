@@ -6,23 +6,22 @@ const RecipeDetail = () => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
 
-  useEffect(() => {
-    const fetchRecipe = async () => {
-      try {
-        const baseURL = "https://geekonweb.com";
-        const localURL = "http://127.0.0.1:8000"
-        // const endpoint = "/recipes";
-        // const url = `${baseURL}${endpoint}`;
-        const response = await fetch(`${baseURL}/recipe/${id}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch recipe');
-        }
-        const data = await response.json();
-        setRecipe(data);
-      } catch (error) {
-        console.error('Error fetching recipe:', error);
-      }
-    };
+    useEffect(() => {
+        const fetchRecipe = async () => {
+            try {
+                const baseURL = "http://geekonweb.com";
+                // const endpoint = "/recipes";
+                // const url = `${baseURL}${endpoint}`;
+                const response = await fetch(`${baseURL}/recipe/${id}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch recipe');
+                }
+                const data = await response.json();
+                setRecipe(data);
+            } catch (error) {
+                console.error('Error fetching recipe:', error);
+            }
+        };
 
     fetchRecipe();
   }, [id]);

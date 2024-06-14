@@ -11,7 +11,7 @@ const AllRecipe = () => {
 
     useEffect(() => {
         const fetchRecipes = async () => {
-            const baseURL = "https:geekonweb.com";
+            const baseURL = "https://geekonweb.com";
             const endpoint = "/recipes";
             const url = `${baseURL}${endpoint}`;
 

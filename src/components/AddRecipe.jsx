@@ -33,7 +33,7 @@ const AddRecipe = () => {
         let local_url = "http://127.0.0.1:8001/recipes";
 
         try {
-            const response = await axios.post(local_url, {
+            const response = await axios.post('https://geekonweb.com/recipe', {
                 title: title,
                 description: description,
                 prepTime: prepTime,
