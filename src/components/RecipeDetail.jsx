@@ -9,7 +9,7 @@ const RecipeDetail = () => {
     useEffect(() => {
         const fetchRecipe = async () => {
             try {
-                const baseURL = "http://127.0.0.1:8000";
+                const baseURL = "http://geekonweb.com";
                 // const endpoint = "/recipes";
                 // const url = `${baseURL}${endpoint}`;
                 const response = await fetch(`${baseURL}/recipe/${id}`);

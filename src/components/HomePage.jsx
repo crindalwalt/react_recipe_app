@@ -12,78 +12,14 @@ const HomePage = () => {
 					<div className="container text-left">
 						<ol className="breadcrumb opacity-5">
 							<li>
-								<a href="#">Home</a>
+								<a href="/">Home</a>
 							</li>
 							<li className="active">recipes</li>
 						</ol>
-						<h1 className="font-weight-300">Recipes - List Layout</h1>
+						<h1 className="font-weight-300">Recipes - Tasty Delight</h1>
 					</div>
 				</div>
-				<div className="container">
-					<div className="margin-bottom-60px">
-						<div className="listing-search box-shadow">
-							<form className="row no-gutters">
-								<div className="col-md-4">
-									<div className="keywords">
-										<input
-											className="listing-form first"
-											type="text"
-											placeholder="Keywords..."
-											defaultValue=""
-										/>
-									</div>
-								</div>
-								<div className="col-md-4">
-									<div className="categories dropdown">
-										<a
-											className="listing-form d-block text-nowrap"
-											id="dropdownMenu2"
-											data-toggle="dropdown"
-											aria-haspopup="true"
-											aria-expanded="false"
-										>
-											All Categories
-										</a>
-										<div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-											<button className="dropdown-item text-up-small" type="button">
-												Fish
-											</button>
-											<button className="dropdown-item text-up-small" type="button">
-												Cocktails
-											</button>
-											<button className="dropdown-item text-up-small" type="button">
-												Salads
-											</button>
-											<button className="dropdown-item text-up-small" type="button">
-												Asian
-											</button>
-											<button className="dropdown-item text-up-small" type="button">
-												Fish
-											</button>
-											<button className="dropdown-item text-up-small" type="button">
-												Cocktails
-											</button>
-											<button className="dropdown-item text-up-small" type="button">
-												Salads
-											</button>
-											<button className="dropdown-item text-up-small" type="button">
-												Asian
-											</button>
-										</div>
-									</div>
-								</div>
-								<div className="col-md-4">
-									<a
-										className="listing-bottom background-second-color box-shadow"
-										href="#"
-									>
-										Search Now
-									</a>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
+				
 				<AllRecipe />
 				<footer className="padding-top-100px padding-bottom-70px background-dark">
 					<div className="container">

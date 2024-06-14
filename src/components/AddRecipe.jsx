@@ -15,7 +15,7 @@ const AddRecipe = () => {
 
     const fetchCsrfToken = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/csrf');
+            const response = await axios.get('https://geekonweb.com/csrf');
             const csrfToken = response.data.csrf_token;
             return csrfToken;
         } catch (error) {
@@ -30,7 +30,7 @@ const AddRecipe = () => {
         let csrf_token = await fetchCsrfToken();
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/recipe', {
+            const response = await axios.post('https://geekonweb.com/recipe', {
                 title: title,
                 description: description,
                 prepTime: prepTime,
