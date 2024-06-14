@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Header from './Header';
 
 const AddRecipe = () => {
     const [title, setTitle] = useState('');
@@ -15,7 +16,7 @@ const AddRecipe = () => {
 
     const fetchCsrfToken = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:8000/csrf');
+            const response = await axios.get('https://geekonweb.com/csrf');
             const csrfToken = response.data.csrf_token;
             return csrfToken;
         } catch (error) {
@@ -28,9 +29,11 @@ const AddRecipe = () => {
         e.preventDefault();
         console.log("im in the handle submit function")
         let csrf_token = await fetchCsrfToken();
+        let prod_url = "https://geekonweb.com/recipes";
+        let local_url = "http://127.0.0.1:8001/recipes";
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/recipe', {
+            const response = await axios.post(local_url, {
                 title: title,
                 description: description,
                 prepTime: prepTime,
@@ -61,137 +64,7 @@ const AddRecipe = () => {
 
 
         <>
-            <header className="background-main-color">
-                <div className="container">
-                    <div className="header-output">
-                        <div className="header-in">
-                            <div className="row">
-                                <div className="col-lg-2 col-md-12">
-                                    <a
-                                        id="logo"
-                                        href="index.html"
-                                        className="d-inline-block margin-tb-5px"
-                                    >
-                                        <img src="assets/img/logo-1.png" alt="" />
-                                    </a>
-                                    <a
-                                        className="mobile-toggle padding-13px background-main-color"
-                                        href="#"
-                                    >
-                                        <i className="fas fa-bars" />
-                                    </a>
-                                </div>
-                                <div className="col-lg-8 col-md-12 position-inherit">
-                                    <ul
-                                        id="menu-main"
-                                        className="white-link dropdown-dark text-lg-center nav-menu link-padding-tb-17px"
-                                    >
-                                        <li className="has-dropdown">
-                                            <a href="#">Home</a>
-                                            <ul className="sub-menu text-left">
-                                                <li>
-                                                    <a href="index.html">Home 1</a>
-                                                </li>
-                                                <li>
-                                                    <a href="index-2.html">Home 2</a>
-                                                </li>
-                                                <li>
-                                                    <a href="index-3.html">Home 3</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li className="has-dropdown">
-                                            <a href="#">Recipes</a>
-                                            <ul className="sub-menu text-left">
-                                                <li>
-                                                    <a href="recipes-grid-layout.html">
-                                                        Recipes - Grid Layout{" "}
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="recipes-list-layout.html">
-                                                        Recipes - List Layout
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="authors-layout-1.html">Authors - Layout (1)</a>
-                                                </li>
-                                                <li>
-                                                    <a href="authors-layout-2.html">Authors - Layout (2)</a>
-                                                </li>
-                                                <li>
-                                                    <a href="single-recipe.html">Single Recipe</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li className="has-dropdown">
-                                            <a href="#">Blog</a>
-                                            <ul className="sub-menu text-left">
-                                                <li>
-                                                    <a href="blog-grid.html">Blog Grid </a>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-list.html">Blog List</a>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-classic.html">Blog Classic</a>
-                                                </li>
-                                                <li>
-                                                    <a href="blog-single.html">Blog Single</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li className="has-dropdown">
-                                            <a href="#">Pages</a>
-                                            <ul className="sub-menu text-left">
-                                                <li>
-                                                    <a href="page-about.html">About Us </a>
-                                                </li>
-                                                <li>
-                                                    <a href="add-recipe.html">Add Recipe</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page-login.html">Login Page</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page-sign-up.html">Sign up</a>
-                                                </li>
-                                                <li>
-                                                    <a href="search-page.html">Search Page</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page-contact-us.html">Contact Us</a>
-                                                </li>
-                                                <li>
-                                                    <a href="page-404.html">Pages 404</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="page-contact-us.html">Conact Us</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className="col-lg-2 col-md-12 d-none d-lg-block">
-                                    <hr className="margin-bottom-0px d-block d-sm-none" />
-                                    <a
-                                        href="add-recipe.html"
-                                        className="text-white ba-2 box-shadow float-right padding-lr-23px padding-tb-15px text-extra-large"
-                                    >
-                                        <i className="fas fa-plus" />
-                                    </a>
-                                    <a
-                                        href="page-login.html"
-                                        className="text-white ba-1 box-shadow float-right padding-lr-23px padding-tb-15px text-extra-large"
-                                    >
-                                        <i className="far fa-user" />
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
+            <Header />
             {/* // Header  */}
             <div id="page-title" className="padding-tb-30px gradient-white">
                 <div className="container">

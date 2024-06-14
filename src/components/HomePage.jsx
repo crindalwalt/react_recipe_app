@@ -16,10 +16,10 @@ const HomePage = () => {
 							</li>
 							<li className="active">recipes</li>
 						</ol>
-						<h1 className="font-weight-300">Recipes - List Layout</h1>
+						<h1 className="font-weight-300">Recipes - Taste of the World </h1>
 					</div>
 				</div>
-				<div className="container">
+				{/* <div className="container">
 					<div className="margin-bottom-60px">
 						<div className="listing-search box-shadow">
 							<form className="row no-gutters">
@@ -83,7 +83,7 @@ const HomePage = () => {
 							</form>
 						</div>
 					</div>
-				</div>
+				</div> */}
 				<AllRecipe />
 				<footer className="padding-top-100px padding-bottom-70px background-dark">
 					<div className="container">

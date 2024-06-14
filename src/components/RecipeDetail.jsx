@@ -1,79 +1,93 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from './Header';
 
 const RecipeDetail = () => {
-    const { id } = useParams();
-    const [recipe, setRecipe] = useState(null);
+  const { id } = useParams();
+  const [recipe, setRecipe] = useState(null);
 
-    useEffect(() => {
-        const fetchRecipe = async () => {
-            try {
-                const baseURL = "http://127.0.0.1:8000";
-                // const endpoint = "/recipes";
-                // const url = `${baseURL}${endpoint}`;
-                const response = await fetch(`${baseURL}/recipe/${id}`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch recipe');
-                }
-                const data = await response.json();
-                setRecipe(data);
-            } catch (error) {
-                console.error('Error fetching recipe:', error);
-            }
-        };
+  useEffect(() => {
+    const fetchRecipe = async () => {
+      try {
+        const baseURL = "https://geekonweb.com";
+        const localURL = "http://127.0.0.1:8000"
+        // const endpoint = "/recipes";
+        // const url = `${baseURL}${endpoint}`;
+        const response = await fetch(`${baseURL}/recipe/${id}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch recipe');
+        }
+        const data = await response.json();
+        setRecipe(data);
+      } catch (error) {
+        console.error('Error fetching recipe:', error);
+      }
+    };
 
-        fetchRecipe();
-    }, [id]);
+    fetchRecipe();
+  }, [id]);
 
-    if (!recipe) {
-        return <p>Loading...</p>;
-    }
+  if (!recipe) {
+    return <p>Loading...</p>;
+  }
 
-    return (
-        <>
-        <Header />
-        {/* // Header  */}
-        <div id="page-title" className="padding-tb-30px gradient-white">
-          <div className="container text-left">
-            <ol className="breadcrumb opacity-5">
-              <li>
-                <a href="#">Home</a>
-              </li>
-              <li className="active">Recipe</li>
-            </ol>
-            <h1 className="font-weight-300">{recipe.title}</h1>
-          </div>
+  return (
+    <>
+      <Header />
+      {/* // Header  */}
+      <div id="page-title" className="padding-tb-30px gradient-white">
+        <div className="container text-left">
+          <ol className="breadcrumb opacity-5">
+            <li>
+              <a href="#">Home</a>
+            </li>
+            <li className="active">Recipe</li>
+          </ol>
+          <h1 className="font-weight-300">{recipe.title}</h1>
         </div>
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-8">
-              <div className="margin-bottom-40px card border-0 box-shadow">
-                <div className="card-img-top">
-                  <a href="#">
-                    <img src={recipe.image} alt="" />
-                  </a>
-                </div>
-                <div className="padding-lr-30px padding-tb-20px">
-                  <h5 className="margin-bottom-20px margin-top-10px">
-                    <a className="text-dark" href="#">
+      </div>
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-8">
+            <div className="margin-bottom-40px card border-0 box-shadow">
+              <div className="card-img-top">
+                <a href="#">
+                  <img src={recipe.image} alt="" />
+                </a>
+              </div>
+              <div className="padding-lr-30px padding-tb-20px">
+                <h5 className="margin-bottom-20px margin-top-10px">
+                  <a className="text-dark" href="#">
                     {recipe.title}
-                    </a>
-                  </h5>
-                  <p>
-                    {recipe.description}
-                  </p>
-                  
-                  <hr />
-                  <h3>Ingredients</h3>
-                  <ul>
-                    {recipe.ingredients.map( item => (
-                        <li key={item.id}>
-                        <strong>{item.quantity}</strong>{item.name}
-                      </li>
-                    ))}
-                    
-                    {/* <li>
+                  </a>
+                </h5>
+                <p>
+                  {recipe.description}
+                </p>
+                <div className='justify-content-center align-items-center'>
+                  <h3 className='ms-3'>Chef Name</h3>
+                  <p className='lead fw-bold'>{recipe.chef}</p>
+                </div>
+                <div className='justify-content-center align-items-center'>
+                  <h3 className='ms-3'>Prep Time</h3>
+                  <p className='lead fw-bold'>{recipe.prep_time}HR</p>
+                </div>
+                <div className='justify-content-center align-items-center'>
+                  <h3 className='ms-3'>Cooking Time</h3>
+                  <p className='lead fw-bold'>{recipe.cook_time}</p>
+                </div>
+                <h3>Instructions</h3>
+                <p className='lead'>{recipe.instructions}</p>
+                <hr />
+                <h3>Ingredients</h3>
+                <ul>
+                  {recipe.ingredients.map(item => (
+                    <li key={item.id}>
+                      <strong>{item.quantity}</strong>{item.name}
+                    </li>
+                  ))}
+
+                  {/* <li>
                       <strong>24 oz</strong> spaghetti sauce (prego traditional)
                     </li>
                     <li>
@@ -91,8 +105,8 @@ const RecipeDetail = () => {
                     <li>
                       <strong>1 packages</strong> pepperoni slices
                     </li> */}
-                  </ul>
-                  {/* <h3>Method</h3>
+                </ul>
+                {/* <h3>Method</h3>
                   <ol>
                     <li>preheat oven to 350º</li>
                     <li>bring noodles to a boil then drain</li>
@@ -113,35 +127,35 @@ const RecipeDetail = () => {
                     </li>
                     <li>back in 350º oven for 20 minutes</li>
                   </ol> */}
-                  <hr />
-                  <div className="row no-gutters">
-                    <div className="col-4 text-left">
-                      <a href="#" className="text-red">
-                        <i className="far fa-heart" /> Save
-                      </a>
-                    </div>
-                    <div className="col-8 text-right">
-                      <a href="#" className="text-grey-2">
-                        <i className="fas fa-users" /> {recipe.servings} servings
-                      </a>
-                    </div>
+                <hr />
+                <div className="row no-gutters">
+                  <div className="col-4 text-left">
+                    <a href="#" className="text-red">
+                      <i className="far fa-heart" /> Save
+                    </a>
+                  </div>
+                  <div className="col-8 text-right">
+                    <a href="#" className="text-grey-2">
+                      <i className="fas fa-users" /> {recipe.servings} servings
+                    </a>
                   </div>
                 </div>
-                <div className="background-light-grey border-top-1 border-grey padding-lr-30px padding-tb-20px">
-                  <a
-                    href="#"
-                    className="d-inline-block text-grey-3 h6 margin-bottom-0px margin-right-15px"
-                  >
-                    <img
-                      src="http://placehold.it/50x50"
-                      className="height-30px border-radius-30 margin-right-15px"
-                      alt=""
-                    />{" "}
-                    {recipe.author}
-                  </a>
-                </div>
               </div>
-              {/* <div className="margin-bottom-40px box-shadow">
+              <div className="background-light-grey border-top-1 border-grey padding-lr-30px padding-tb-20px">
+                <a
+                  href="#"
+                  className="d-inline-block text-grey-3 h6 margin-bottom-0px margin-right-15px"
+                >
+                  <img
+                    src="http://placehold.it/50x50"
+                    className="height-30px border-radius-30 margin-right-15px"
+                    alt=""
+                  />{" "}
+                  {recipe.author}
+                </a>
+              </div>
+            </div>
+            {/* <div className="margin-bottom-40px box-shadow">
                 <div className="padding-30px background-white">
                   <h3>
                     <i className="far fa-star margin-right-10px text-main-color" />{" "}
@@ -304,8 +318,8 @@ const RecipeDetail = () => {
                   </form>
                 </div>
               </div> */}
-            </div>
-            {/* <div className="col-lg-4">
+          </div>
+          {/* <div className="col-lg-4">
               <div className="listing-search box-shadow background-main-color padding-30px margin-bottom-30px">
                 <form className="row no-gutters">
                   <div className="col-md-12">
@@ -463,192 +477,192 @@ const RecipeDetail = () => {
                 </div>
               </div>
             </div> */}
-          </div>
         </div>
-        <footer className="padding-top-100px padding-bottom-70px background-dark">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-4 col-md-4 sm-mb-30px">
-                <div className="logo margin-bottom-10px">
-                  <img src="assets/img/logo-1.png" alt="" />
-                </div>
-                <div className="text-grey-2  font-weight-300">
-                  Lorem Ipsum is simply dummy text of the printing and typesetting
-                  industry. Lorem Ipsum has been the industrys standard dummy .
-                </div>
-                <ul className="list-inline text-left margin-tb-20px margin-lr-0px text-white">
-                  <li className="list-inline-item">
-                    <a className="facebook" href="#">
-                      <i className="fab fa-facebook-f" />
-                    </a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a className="youtube" href="#">
-                      <i className="fab fa-youtube" />
-                    </a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a className="linkedin" href="#">
-                      <i className="fab fa-linkedin" />
-                    </a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a className="google" href="#">
-                      <i className="fab fa-google-plus" />
-                    </a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a className="twitter" href="#">
-                      <i className="fab fa-twitter" />
-                    </a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a className="rss" href="#">
-                      <i className="fa fa-rss" aria-hidden="true" />
-                    </a>
-                  </li>
-                </ul>
-                {/* // Social */}
+      </div>
+      <footer className="padding-top-100px padding-bottom-70px background-dark">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-4 col-md-4 sm-mb-30px">
+              <div className="logo margin-bottom-10px">
+                <img src="assets/img/logo-1.png" alt="" />
               </div>
-              <div className="col-lg-4  col-md-4 sm-mb-30px">
-                <ul className="footer-menu-2 row margin-0px padding-0px list-unstyled">
-                  <li className="col-6  padding-tb-5px">
-                    <a href="#" className="text-grey-2">
-                      Home
-                    </a>
-                  </li>
-                  <li className="col-6  padding-tb-5px">
-                    <a href="#" className="text-grey-2">
-                      Featured
-                    </a>
-                  </li>
-                  <li className="col-6  padding-tb-5px">
-                    <a href="#" className="text-grey-2">
-                      Feedback
-                    </a>
-                  </li>
-                  <li className="col-6  padding-tb-5px">
-                    <a href="#" className="text-grey-2">
-                      Ask a Question
-                    </a>
-                  </li>
-                  <li className="col-6  padding-tb-5px">
-                    <a href="#" className="text-grey-2">
-                      Team
-                    </a>
-                  </li>
-                  <li className="col-6  padding-tb-5px">
-                    <a href="#" className="text-grey-2">
-                      Maintenance
-                    </a>
-                  </li>
-                  <li className="col-6  padding-tb-5px">
-                    <a href="#" className="text-grey-2">
-                      Get a Quote
-                    </a>
-                  </li>
-                  <li className="col-6  padding-tb-5px">
-                    <a href="#" className="text-grey-2">
-                      Contact Us
-                    </a>
-                  </li>
-                </ul>
+              <div className="text-grey-2  font-weight-300">
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industrys standard dummy .
               </div>
-              <div className="col-lg-4  col-md-4 sm-mb-30px">
-                <ul className="footer-menu-2 row margin-0px padding-0px list-unstyled">
-                  <li className="col-6  padding-tb-5px">
-                    <a href="#" className="text-grey-2">
-                      Home
-                    </a>
-                  </li>
-                  <li className="col-6  padding-tb-5px">
-                    <a href="#" className="text-grey-2">
-                      Featured
-                    </a>
-                  </li>
-                  <li className="col-6  padding-tb-5px">
-                    <a href="#" className="text-grey-2">
-                      Feedback
-                    </a>
-                  </li>
-                  <li className="col-6  padding-tb-5px">
-                    <a href="#" className="text-grey-2">
-                      Ask a Question
-                    </a>
-                  </li>
-                  <li className="col-6  padding-tb-5px">
-                    <a href="#" className="text-grey-2">
-                      Team
-                    </a>
-                  </li>
-                  <li className="col-6  padding-tb-5px">
-                    <a href="#" className="text-grey-2">
-                      Maintenance
-                    </a>
-                  </li>
-                  <li className="col-6  padding-tb-5px">
-                    <a href="#" className="text-grey-2">
-                      Get a Quote
-                    </a>
-                  </li>
-                  <li className="col-6  padding-tb-5px">
-                    <a href="#" className="text-grey-2">
-                      Contact Us
-                    </a>
-                  </li>
-                </ul>
-              </div>
+              <ul className="list-inline text-left margin-tb-20px margin-lr-0px text-white">
+                <li className="list-inline-item">
+                  <a className="facebook" href="#">
+                    <i className="fab fa-facebook-f" />
+                  </a>
+                </li>
+                <li className="list-inline-item">
+                  <a className="youtube" href="#">
+                    <i className="fab fa-youtube" />
+                  </a>
+                </li>
+                <li className="list-inline-item">
+                  <a className="linkedin" href="#">
+                    <i className="fab fa-linkedin" />
+                  </a>
+                </li>
+                <li className="list-inline-item">
+                  <a className="google" href="#">
+                    <i className="fab fa-google-plus" />
+                  </a>
+                </li>
+                <li className="list-inline-item">
+                  <a className="twitter" href="#">
+                    <i className="fab fa-twitter" />
+                  </a>
+                </li>
+                <li className="list-inline-item">
+                  <a className="rss" href="#">
+                    <i className="fa fa-rss" aria-hidden="true" />
+                  </a>
+                </li>
+              </ul>
+              {/* // Social */}
             </div>
-          </div>
-        </footer>
-        <div className="padding-tb-10px background-main-color">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6">
-                <div className="text-white margin-tb-15px text-center text-lg-left">
-                  Cook Note | @2017 All copy rights reserved
-                </div>
-              </div>
-              <div className="col-md-6">
-                <ul className="list-inline text-lg-right text-center margin-lr-0px margin-tb-15px text-white">
-                  <li className="list-inline-item margin-lr-8px">
-                    <a className="facebook" href="#">
-                      <i className="fab fa-facebook-f" />
-                    </a>
-                  </li>
-                  <li className="list-inline-item margin-lr-8px">
-                    <a className="facebook" href="#">
-                      <i className="fab fa-youtube" />
-                    </a>
-                  </li>
-                  <li className="list-inline-item margin-lr-8px">
-                    <a className="facebook" href="#">
-                      <i className="fab fa-linkedin" />
-                    </a>
-                  </li>
-                  <li className="list-inline-item margin-lr-8px">
-                    <a className="facebook" href="#">
-                      <i className="fab fa-google-plus" />
-                    </a>
-                  </li>
-                  <li className="list-inline-item margin-lr-8px">
-                    <a className="facebook" href="#">
-                      <i className="fab fa-twitter" />
-                    </a>
-                  </li>
-                  <li className="list-inline-item margin-lr-8px">
-                    <a className="rss" href="#">
-                      <i className="fa fa-rss" aria-hidden="true" />
-                    </a>
-                  </li>
-                </ul>
-              </div>
+            <div className="col-lg-4  col-md-4 sm-mb-30px">
+              <ul className="footer-menu-2 row margin-0px padding-0px list-unstyled">
+                <li className="col-6  padding-tb-5px">
+                  <a href="#" className="text-grey-2">
+                    Home
+                  </a>
+                </li>
+                <li className="col-6  padding-tb-5px">
+                  <a href="#" className="text-grey-2">
+                    Featured
+                  </a>
+                </li>
+                <li className="col-6  padding-tb-5px">
+                  <a href="#" className="text-grey-2">
+                    Feedback
+                  </a>
+                </li>
+                <li className="col-6  padding-tb-5px">
+                  <a href="#" className="text-grey-2">
+                    Ask a Question
+                  </a>
+                </li>
+                <li className="col-6  padding-tb-5px">
+                  <a href="#" className="text-grey-2">
+                    Team
+                  </a>
+                </li>
+                <li className="col-6  padding-tb-5px">
+                  <a href="#" className="text-grey-2">
+                    Maintenance
+                  </a>
+                </li>
+                <li className="col-6  padding-tb-5px">
+                  <a href="#" className="text-grey-2">
+                    Get a Quote
+                  </a>
+                </li>
+                <li className="col-6  padding-tb-5px">
+                  <a href="#" className="text-grey-2">
+                    Contact Us
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="col-lg-4  col-md-4 sm-mb-30px">
+              <ul className="footer-menu-2 row margin-0px padding-0px list-unstyled">
+                <li className="col-6  padding-tb-5px">
+                  <a href="#" className="text-grey-2">
+                    Home
+                  </a>
+                </li>
+                <li className="col-6  padding-tb-5px">
+                  <a href="#" className="text-grey-2">
+                    Featured
+                  </a>
+                </li>
+                <li className="col-6  padding-tb-5px">
+                  <a href="#" className="text-grey-2">
+                    Feedback
+                  </a>
+                </li>
+                <li className="col-6  padding-tb-5px">
+                  <a href="#" className="text-grey-2">
+                    Ask a Question
+                  </a>
+                </li>
+                <li className="col-6  padding-tb-5px">
+                  <a href="#" className="text-grey-2">
+                    Team
+                  </a>
+                </li>
+                <li className="col-6  padding-tb-5px">
+                  <a href="#" className="text-grey-2">
+                    Maintenance
+                  </a>
+                </li>
+                <li className="col-6  padding-tb-5px">
+                  <a href="#" className="text-grey-2">
+                    Get a Quote
+                  </a>
+                </li>
+                <li className="col-6  padding-tb-5px">
+                  <a href="#" className="text-grey-2">
+                    Contact Us
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
-      </>
-      
-    );
+      </footer>
+      <div className="padding-tb-10px background-main-color">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6">
+              <div className="text-white margin-tb-15px text-center text-lg-left">
+                Cook Note | @2017 All copy rights reserved
+              </div>
+            </div>
+            <div className="col-md-6">
+              <ul className="list-inline text-lg-right text-center margin-lr-0px margin-tb-15px text-white">
+                <li className="list-inline-item margin-lr-8px">
+                  <a className="facebook" href="#">
+                    <i className="fab fa-facebook-f" />
+                  </a>
+                </li>
+                <li className="list-inline-item margin-lr-8px">
+                  <a className="facebook" href="#">
+                    <i className="fab fa-youtube" />
+                  </a>
+                </li>
+                <li className="list-inline-item margin-lr-8px">
+                  <a className="facebook" href="#">
+                    <i className="fab fa-linkedin" />
+                  </a>
+                </li>
+                <li className="list-inline-item margin-lr-8px">
+                  <a className="facebook" href="#">
+                    <i className="fab fa-google-plus" />
+                  </a>
+                </li>
+                <li className="list-inline-item margin-lr-8px">
+                  <a className="facebook" href="#">
+                    <i className="fab fa-twitter" />
+                  </a>
+                </li>
+                <li className="list-inline-item margin-lr-8px">
+                  <a className="rss" href="#">
+                    <i className="fa fa-rss" aria-hidden="true" />
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+
+  );
 };
 
 export default RecipeDetail;

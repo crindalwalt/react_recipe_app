@@ -16,7 +16,7 @@ const SingleRecipeCard = ({ recipe }) => {
             <div className="background-white thum-hover box-shadow hvr-float full-width">
                 <div className="float-md-left margin-right-30px thum-xs">
                     <img
-                        className="width-250px"
+                        className="img-fluid"
                         src={recipe.image}
                         alt=""
                     />
